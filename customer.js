@@ -1,0 +1,12 @@
+var cust=require('./router/custommer1');
+var express=require('express');
+var app=express();
+var bodyParser=require('body-parser');
+var json=bodyParser.urlencoded({extended:false});
+app.use(json);
+app.use(express.json());
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./apiswagger.json');
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/custommer1',cust);
+app.listen(8000,()=>{console.log("app is running")});
